@@ -2,6 +2,13 @@
 // and it will obtain information about the double numbers like
 // the lowest number, the highest number, and the sum of the
 // numbers.
+#include <iostream>
+#include <iomanip>
+#include "Computation.h"
+
+// C++ standard library namespace was needed too:
+using namespace std;
+
 class Statistician : Computation
 {
     private:
@@ -60,10 +67,10 @@ Statistician::Statistician(double num)
 // This constructor sets all fields to the specified
 // double number. 
 {
-    this->num = double;
-    this->lowest = double;
-    this->highest = double;
-    this->sum = double;
+    this->num = num;
+    this->lowest = num;
+    this->highest = num;
+    this->sum = num;
 }
 
 void Statistician::getStatistician(double& lowest, double& highest, double& sum) const
@@ -75,38 +82,42 @@ void Statistician::getStatistician(double& lowest, double& highest, double& sum)
     sum = this->sum;
 }
 
-void Statistician::addNumber(double)
+void Statistician::addNumber(double num)
 // This method sets the num field to the specified double number
 // and then calls the methods that compute the lowest, highest,
 // and sum of the numbers added to this Statistician.
 {
-    num = this->lowest;
-    num = this->highest;
-    num = this->sum;
+    this->num = num;
+    computeHighest();
+    computeLowest();
+    computeSum();
 }
 
-void Statistician::computeLowest() override
+void Statistician::computeLowest()
 // This method computes the lowest double number added to this
 // Stastician.
 {
-    lowest = this->lowest;
+    if (num < lowest) {
+    lowest = num;
+    }
 }
 
 
-void Statistician::computeHighest() override
+
+void Statistician::computeHighest()
 // This method computes the highest double number added to this
 // Stastician.
 {
-    highest = this->highest;
+    if (num > highest) {
+    highest = num;
+    }
 }
 
-void Statistician::computeSum() override
+void Statistician::computeSum()
 // This method computes the sum of the double numbers added to 
 // this Stastician.
 {
-    double sum;
-    this->Statistician::computeSum(num);
-    sum = lowest + heighest;
+    sum += num;
 }
 
 void Statistician::printStatistician() const
@@ -118,10 +129,11 @@ void Statistician::printStatistician() const
     cout << "lowest=" << lowest << ", highest=" << highest << ", sum=" << sum << endl;
 }
 
-bool Statistician::equalStatistician(const Statistician& otherStatistician) const
+bool Statistician::equalStatistician(const Statistician& other) const
 // This method returns true if this Stastician is equal to
 // the specified otherStatistician, else it returns false
 {
-    return (sum == otherStatistician.sum &&
-        sum == otherStatistician.sum);
+    return (lowest == other.lowest &&
+        highest == other.highest &&
+        sum == other.sum);
 }
